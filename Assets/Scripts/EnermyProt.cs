@@ -243,4 +243,9 @@ public class EnermyProt : MonoBehaviour
             hitPlayer = false;
         }
     }
+
+    IEnumerator StayIdle()
+    {
+        yield return new WaitForSeconds(2);
+    }
 }

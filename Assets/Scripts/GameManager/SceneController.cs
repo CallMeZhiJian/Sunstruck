@@ -25,11 +25,25 @@ public class SceneController : MonoBehaviour
     {
         StartCoroutine(LoadLevel());
     }
+
+    public void Cutscene()
+    {
+        StartCoroutine(LoadCutscene());
+    }
+
     IEnumerator LoadLevel()
     {
         transitionAnim.SetTrigger("End");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        transitionAnim.SetTrigger("Start");
+    }
+
+    IEnumerator LoadCutscene()
+    {
+        transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("Cutscene2", LoadSceneMode.Additive);
         transitionAnim.SetTrigger("Start");
     }
 

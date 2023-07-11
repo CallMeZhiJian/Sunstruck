@@ -5,9 +5,11 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public GameObject background;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public float textSpeed;
+    public bool isTalking;
 
     public Animator anim;
     public Dialogue dialogue;
@@ -18,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         dialogueText.text = string.Empty;
-
+        isTalking = true;
     }
 
     // Update is called once per frameZ
@@ -43,6 +45,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue()
     {
         anim.SetBool("IsOpen", true);
+        background.SetActive(true);
         index = 0;
 
         nameText.text = dialogue.name;
@@ -77,5 +80,7 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         anim.SetBool("IsOpen", false);
+        background.SetActive(false);
+        isTalking = false;
     }
 }

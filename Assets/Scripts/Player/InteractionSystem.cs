@@ -74,6 +74,7 @@ public class InteractionSystem : MonoBehaviour
             print("StunGun Picked Up");
             pickUpStunGun = true;
             stunGun.GetComponent<Animator>().SetBool("stunGunPickUp", true);
+            SceneController.instance.Cutscene();
         }
         else if(obj.tag == "Suit")
         {

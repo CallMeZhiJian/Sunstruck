@@ -17,12 +17,16 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D playerRb;
     private BoxCollider2D playerCollider;
     public Animator anima;
+    private Transform playerTrans;
+    private GameObject currentTriggerObj;
 
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
+        playerTrans = GetComponent<Transform>();
     }
+
     private void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
@@ -61,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         if (isClimbing)
         {
             playerRb.gravityScale = 0f;
-            playerRb.velocity = new Vector2(0, verticle * climbSpeed);
+            playerRb.velocity = new Vector2(playerRb.velocity.x, verticle * climbSpeed);
         }
         else
             playerRb.gravityScale = 3f;
@@ -76,7 +80,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Climable"))
+        {
+            currentTriggerObj = collision.gameObject;
             isLadder = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -86,5 +93,13 @@ public class PlayerMovement : MonoBehaviour
             isLadder = false;
             isClimbing = false;
         }   
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(isClimbing)
+        {
+            playerTrans.position = new Vector3(currentTriggerObj.transform.position.x, playerTrans.position.y, playerTrans.position.z);
+        }
     }
 }

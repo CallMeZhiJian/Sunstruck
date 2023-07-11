@@ -17,7 +17,7 @@ public class HidingMechanism : MonoBehaviour
             this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             this.GetComponent<SpriteRenderer>().enabled = false;
         }
-        else if (Input.GetKeyUp(KeyCode.F))
+        else if (Input.GetKeyUp(KeyCode.J))
         {
             this.GetComponent<BoxCollider2D>().isTrigger = false;
             this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
